@@ -1,7 +1,16 @@
 {
   "approved": true,
-  "latest_version_code": 227,
-  "baseline_sha256": "4319009873c43233df5f230b3721b9205ed32d334659c3716f281937f36a69a0",
-  "notes": "",
-  "updates": []
+  "latest_version_code": 228,
+  "baseline_sha256": "15fa42c1ea6a3deecaffd845c2d6b32628a2caccec4f61f5e76cf1063bdc4be1",
+  "notes": "무선가입안내 지원금·할부·결제 영역에서 출고가와 할부기간 위치를 정리했습니다.",
+  "updates": [
+    {
+      "from_version_code": 227,
+      "to_version_code": 228,
+      "base_sha256": "4319009873c43233df5f230b3721b9205ed32d334659c3716f281937f36a69a0",
+      "target_sha256": "15fa42c1ea6a3deecaffd845c2d6b32628a2caccec4f61f5e76cf1063bdc4be1",
+      "patch_sha256": "65513b5261a5fe581a01ba943a969cd7033caef527f778eecf9524dbf8f96684",
+      "patch": "patch_227_228.zst"
+    }
+  ]
 }
