@@ -46,11 +46,15 @@ jobs:
           Expand-Archive work/zstd.zip work/zstd -Force
           $zstd=(Get-ChildItem work/zstd -Recurse -Filter zstd.exe | Select-Object -First 1)
           Copy-Item $zstd.FullName work/zstd.exe -Force
-          & .\work\zstd.exe -9 "--patch-from=work/v234/폰매니저.exe" -f "work/v235/폰매니저.exe" -o "patch_234_235.zst"
+
+          # zstd Windows CLI는 한글 경로를 직접 넘기면 실패할 수 있으므로 영문 임시파일로 작업한다.
+          Copy-Item "work/v234/폰매니저.exe" "work/base234.exe" -Force
+          Copy-Item "work/v235/폰매니저.exe" "work/target235.exe" -Force
+          & .\work\zstd.exe -9 "--patch-from=work/base234.exe" -f "work/target235.exe" -o "patch_234_235.zst"
           if ($LASTEXITCODE -ne 0) { throw "patch generation failed" }
-          & .\work\zstd.exe -d "--patch-from=work/v234/폰매니저.exe" -f "patch_234_235.zst" -o "work/reconstructed.exe"
+          & .\work\zstd.exe -d "--patch-from=work/base234.exe" -f "patch_234_235.zst" -o "work/reconstructed.exe"
           if ($LASTEXITCODE -ne 0) { throw "patch reconstruction failed" }
-          $target=(Get-FileHash "work/v235/폰매니저.exe" -Algorithm SHA256).Hash.ToLower()
+          $target=(Get-FileHash "work/target235.exe" -Algorithm SHA256).Hash.ToLower()
           $recon=(Get-FileHash "work/reconstructed.exe" -Algorithm SHA256).Hash.ToLower()
           if ($target -ne $recon) { throw "reconstructed EXE mismatch" }
           $patch=(Get-FileHash "patch_234_235.zst" -Algorithm SHA256).Hash.ToLower()
