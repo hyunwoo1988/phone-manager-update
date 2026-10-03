@@ -1,5 +1,5 @@
 {
-  "approved": false,
+  "approved": true,
   "latest_version_code": 233,
   "baseline_sha256": "c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c",
   "notes": "RaiDrive 실행 안정화와 중앙 자동업데이트 검증/교체 안정성을 개선했습니다.",
