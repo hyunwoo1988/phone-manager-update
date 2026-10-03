@@ -1,16 +1,16 @@
 {
   "approved": false,
-  "latest_version_code": 228,
-  "baseline_sha256": "15fa42c1ea6a3deecaffd845c2d6b32628a2caccec4f61f5e76cf1063bdc4be1",
-  "notes": "v228 패키징 오류로 자동업데이트를 잠시 중지했습니다. 수정된 폰매니저(v229)를 직접 배포합니다.",
+  "latest_version_code": 233,
+  "baseline_sha256": "c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c",
+  "notes": "RaiDrive 실행 안정화와 중앙 자동업데이트 검증/교체 안정성을 개선했습니다.",
   "updates": [
     {
-      "from_version_code": 227,
-      "to_version_code": 228,
-      "base_sha256": "4319009873c43233df5f230b3721b9205ed32d334659c3716f281937f36a69a0",
-      "target_sha256": "15fa42c1ea6a3deecaffd845c2d6b32628a2caccec4f61f5e76cf1063bdc4be1",
-      "patch_sha256": "65513b5261a5fe581a01ba943a969cd7033caef527f778eecf9524dbf8f96684",
-      "patch": "patch_227_228.zst"
+      "from_version_code": 232,
+      "to_version_code": 233,
+      "base_sha256": "680bb14231c3ae7b7bde6ff76a22a82106f112cfbb532eaba0c5e7d432642efe",
+      "target_sha256": "c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c",
+      "patch_sha256": "46d5793ec0813101302db13bdc8224b27fe41cbb0e4ed99a7fa5ef5a51b428c8",
+      "patch": "patch_232_233.zst"
     }
   ]
 }
