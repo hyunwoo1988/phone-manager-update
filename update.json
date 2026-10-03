@@ -1,8 +1,8 @@
 {
-  "approved": true,
+  "approved": false,
   "latest_version_code": 238,
   "baseline_sha256": "a5746171ddccb2fc9d3abf11c63527d56d46dc3ffa8bf01e70ab396267d6d23f",
-  "notes": "월 납부 견적서에서 보험 표시, 보험 포함 월합계, 최종 변경 요금제/변경 가능일 배치와 강조, 월 단말기 할부금 이자 포함 표시를 반영했습니다.",
+  "notes": "v238 실제 빌드 재검증 중이라 중앙업데이트를 잠시 중지했습니다.",
   "updates": [
     {
       "from_version_code": 232,
