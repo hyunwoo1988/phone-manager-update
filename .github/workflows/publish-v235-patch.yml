@@ -1,0 +1,67 @@
+name: Publish v234 to v235 patch
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-v235-patch.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download exact official builds
+        shell: pwsh
+        run: |
+          $u234 = 'https://sdmntprseasia.oaiusercontent.com/files/00000000-8bb4-8207-9715-d2a657e52514/raw?se=2026-10-03T03%3A26%3A07Z&sp=r&sv=2026-02-06&sr=b&scid=f343a19a-7c2a-52e6-96c2-ac291208dc3c&skoid=6980ab1e-b994-4668-84de-ad0444c9d08b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-03T02%3A08%3A10Z&ske=2026-10-04T02%3A08%3A10Z&sks=b&skv=2026-02-06&sig=bOjXQEUM4ZqoXN/pC1I2uyRffxslg0HxJv2VbCVasW8%3D'
+          $u235 = 'https://sdmntprseasia.oaiusercontent.com/files/00000000-5df0-8207-890f-d57f3814c333/raw?se=2026-10-03T03%3A44%3A47Z&sp=r&sv=2026-02-06&sr=b&scid=91774046-3ee1-5030-a3ae-74b684ffcc28&skoid=6980ab1e-b994-4668-84de-ad0444c9d08b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-03T01%3A16%3A18Z&ske=2026-10-04T01%3A16%3A18Z&sks=b&skv=2026-02-06&sig=CpBmsrvtoylePimnZxZG5BQm/QbctLPAEPw2I%2BIVd8A%3D'
+          New-Item -ItemType Directory -Force work | Out-Null
+          Invoke-WebRequest -Uri $u234 -OutFile work/v234.zip
+          Invoke-WebRequest -Uri $u235 -OutFile work/v235.zip
+          Expand-Archive work/v234.zip work/v234 -Force
+          Expand-Archive work/v235.zip work/v235 -Force
+
+      - name: Verify official build hashes
+        shell: pwsh
+        run: |
+          $h234=(Get-FileHash "work/v234/폰매니저.exe" -Algorithm SHA256).Hash.ToLower()
+          $h235=(Get-FileHash "work/v235/폰매니저.exe" -Algorithm SHA256).Hash.ToLower()
+          Write-Host "v234=$h234"
+          Write-Host "v235=$h235"
+          if ($h234 -ne "94781262182be2bdd2a3ed3581811828e812fc4b0891e2b5db20a7c83e18d245") { throw "v234 hash mismatch" }
+          if ($h235 -ne "d3f86e827351ed0780cc54f98099a5cb47a2204db69b68de101b158cff2bdbff") { throw "v235 hash mismatch" }
+
+      - name: Generate and verify zstd patch
+        shell: pwsh
+        run: |
+          $url="https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-v1.5.7-win64.zip"
+          Invoke-WebRequest -Uri $url -OutFile work/zstd.zip
+          Expand-Archive work/zstd.zip work/zstd -Force
+          $zstd=(Get-ChildItem work/zstd -Recurse -Filter zstd.exe | Select-Object -First 1)
+          Copy-Item $zstd.FullName work/zstd.exe -Force
+          & .\work\zstd.exe -9 "--patch-from=work/v234/폰매니저.exe" -f "work/v235/폰매니저.exe" -o "patch_234_235.zst"
+          if ($LASTEXITCODE -ne 0) { throw "patch generation failed" }
+          & .\work\zstd.exe -d "--patch-from=work/v234/폰매니저.exe" -f "patch_234_235.zst" -o "work/reconstructed.exe"
+          if ($LASTEXITCODE -ne 0) { throw "patch reconstruction failed" }
+          $target=(Get-FileHash "work/v235/폰매니저.exe" -Algorithm SHA256).Hash.ToLower()
+          $recon=(Get-FileHash "work/reconstructed.exe" -Algorithm SHA256).Hash.ToLower()
+          if ($target -ne $recon) { throw "reconstructed EXE mismatch" }
+          $patch=(Get-FileHash "patch_234_235.zst" -Algorithm SHA256).Hash.ToLower()
+          Write-Host "PATCH_SHA256=$patch"
+          Set-Content work/patch_sha.txt $patch -Encoding ascii
+
+      - name: Commit patch binary
+        shell: pwsh
+        run: |
+          git config user.name "phone-manager-updater"
+          git config user.email "actions@users.noreply.github.com"
+          git add patch_234_235.zst
+          git commit -m "Publish v234 to v235 patch"
+          git push origin HEAD:main
