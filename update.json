@@ -1,7 +1,16 @@
 {
   "approved": true,
-  "latest_version_code": 234,
-  "baseline_sha256": "94781262182be2bdd2a3ed3581811828e812fc4b0891e2b5db20a7c83e18d245",
-  "notes": "v234를 중앙업데이트 공식 기준본으로 확정했습니다. 다음 버전부터 프로그램 파일만 자동 업데이트되며 고객정보·백업·출력물은 그대로 유지됩니다.",
-  "updates": []
+  "latest_version_code": 235,
+  "baseline_sha256": "d3f86e827351ed0780cc54f98099a5cb47a2204db69b68de101b158cff2bdbff",
+  "notes": "월 납부 견적서에 보험 유지/해지 선택을 추가하고, RaiDrive 사용 시 미리보기/출력창 표시 속도를 개선했습니다.",
+  "updates": [
+    {
+      "from_version_code": 234,
+      "to_version_code": 235,
+      "base_sha256": "94781262182be2bdd2a3ed3581811828e812fc4b0891e2b5db20a7c83e18d245",
+      "target_sha256": "d3f86e827351ed0780cc54f98099a5cb47a2204db69b68de101b158cff2bdbff",
+      "patch_sha256": "fa1eb3a1c55b24790228bffb32fcffbbb539176d650a7688c3d76f315df3e3f2",
+      "patch": "patch_234_235.zst"
+    }
+  ]
 }
