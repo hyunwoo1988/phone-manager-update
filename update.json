@@ -1,9 +1,25 @@
 {
   "approved": true,
-  "latest_version_code": 236,
-  "baseline_sha256": "b1c222faddd255160e30bc9b71102baa3c14df5ba63c29e5c746fc9e3702cd3b",
-  "notes": "월 납부 견적서 상단의 중복 보험 해지 가능일·해지 조건을 제거하고 보험 유지/해지만 남겼습니다.",
+  "latest_version_code": 237,
+  "baseline_sha256": "acd474f9c385de95cf1477d951082acb9fcbccc2e4e300f75723c966f8373f92",
+  "notes": "예전 배포본(v232 포함)도 최신 버전까지 올라오도록 중앙업데이트 경로를 보완했고, 월 납부 견적서 표 값들을 가운데 정렬했습니다.",
   "updates": [
+    {
+      "from_version_code": 232,
+      "to_version_code": 233,
+      "base_sha256": "680bb14231c3ae7b7bde6ff76a22a82106f112cfbb532eaba0c5e7d432642efe",
+      "target_sha256": "c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c",
+      "patch_sha256": "46d5793ec0813101302db13bdc8224b27fe41cbb0e4ed99a7fa5ef5a51b428c8",
+      "patch": "patch_232_233.zst"
+    },
+    {
+      "from_version_code": 233,
+      "to_version_code": 234,
+      "base_sha256": "c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c",
+      "target_sha256": "94781262182be2bdd2a3ed3581811828e812fc4b0891e2b5db20a7c83e18d245",
+      "patch_sha256": "1475ea81cceb6b648beda93da68c9149420a632c429abc7470f2a5b1f3ff538a",
+      "patch": "patch_233_234.zst"
+    },
     {
       "from_version_code": 234,
       "to_version_code": 235,
@@ -19,6 +35,14 @@
       "target_sha256": "b1c222faddd255160e30bc9b71102baa3c14df5ba63c29e5c746fc9e3702cd3b",
       "patch_sha256": "7d4b4e809ba99b2445da659bc6b98519d5a35ca4a6feec654ec6cb8ce2b901e7",
       "patch": "patch_235_236.zst"
+    },
+    {
+      "from_version_code": 236,
+      "to_version_code": 237,
+      "base_sha256": "b1c222faddd255160e30bc9b71102baa3c14df5ba63c29e5c746fc9e3702cd3b",
+      "target_sha256": "acd474f9c385de95cf1477d951082acb9fcbccc2e4e300f75723c966f8373f92",
+      "patch_sha256": "4d3351bb1c896738241490987e5625ad7000dae284fb8af29dad21ad43f5057a",
+      "patch": "patch_236_237.zst"
     }
   ]
 }
