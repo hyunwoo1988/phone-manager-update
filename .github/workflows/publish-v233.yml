@@ -2,6 +2,10 @@ name: Publish v233 central update
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/publish-v233.yml'
 
 permissions:
   contents: write
