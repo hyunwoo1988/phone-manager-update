@@ -1,8 +1,8 @@
 {
-  "approved": false,
-  "latest_version_code": 238,
-  "baseline_sha256": "a5746171ddccb2fc9d3abf11c63527d56d46dc3ffa8bf01e70ab396267d6d23f",
-  "notes": "v238 실제 빌드 재검증 중이라 중앙업데이트를 잠시 중지했습니다.",
+  "approved": true,
+  "latest_version_code": 239,
+  "baseline_sha256": "7e6c74cdf1d436e1a16a045362751129c012744679d1ee0923691de2bb8b8fde",
+  "notes": "월 납부 견적서 수정과 RaiDrive 로컬 실행 캐시 오류를 함께 수정했습니다. 새 EXE는 실제 SHA256 기준으로 로컬 실행본을 갱신합니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -46,11 +46,11 @@
     },
     {
       "from_version_code": 237,
-      "to_version_code": 238,
+      "to_version_code": 239,
       "base_sha256": "acd474f9c385de95cf1477d951082acb9fcbccc2e4e300f75723c966f8373f92",
-      "target_sha256": "a5746171ddccb2fc9d3abf11c63527d56d46dc3ffa8bf01e70ab396267d6d23f",
-      "patch_sha256": "a4cb5cf6e14d901850d49d41d886b03cd8b31c7294bde1f3c9ace62557f52ac6",
-      "patch": "patch_237_238.zst"
+      "target_sha256": "7e6c74cdf1d436e1a16a045362751129c012744679d1ee0923691de2bb8b8fde",
+      "patch_sha256": "f404c90d87299ef607c35de78bcbdccc513ba9fca3fae3d4debded7776f70840",
+      "patch": "patch_237_239.zst"
     }
   ]
 }
