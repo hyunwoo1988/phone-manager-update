@@ -35,8 +35,12 @@ jobs:
           $targetSha = (Get-FileHash $targetExe -Algorithm SHA256).Hash.ToLower()
           if ($baseSha -ne "680bb14231c3ae7b7bde6ff76a22a82106f112cfbb532eaba0c5e7d432642efe") { throw "v232 hash mismatch: $baseSha" }
           if ($targetSha -ne "c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c") { throw "v233 hash mismatch: $targetSha" }
-          "BASE_EXE=$baseExe" | Out-File -FilePath $env:GITHUB_ENV -Append
-          "TARGET_EXE=$targetExe" | Out-File -FilePath $env:GITHUB_ENV -Append
+          Copy-Item -LiteralPath $baseExe -Destination ".\\base_v232.exe" -Force
+          Copy-Item -LiteralPath $targetExe -Destination ".\\target_v233.exe" -Force
+          $baseAscii=(Resolve-Path ".\\base_v232.exe").Path
+          $targetAscii=(Resolve-Path ".\\target_v233.exe").Path
+          "BASE_EXE=$baseAscii" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "TARGET_EXE=$targetAscii" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - name: Download zstd and build verified patch
         shell: pwsh
