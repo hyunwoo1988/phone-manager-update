@@ -1,16 +1,7 @@
 {
-  "approved": false,
-  "latest_version_code": 233,
-  "baseline_sha256": "c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c",
-  "notes": "중앙업데이트 한글/RaiDrive 경로 호환성 최종 점검 중입니다. 검증 완료 전에는 자동업데이트하지 않습니다.",
-  "updates": [
-    {
-      "from_version_code": 232,
-      "to_version_code": 233,
-      "base_sha256": "680bb14231c3ae7b7bde6ff76a22a82106f112cfbb532eaba0c5e7d432642efe",
-      "target_sha256": "c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c",
-      "patch_sha256": "46d5793ec0813101302db13bdc8224b27fe41cbb0e4ed99a7fa5ef5a51b428c8",
-      "patch": "patch_232_233.zst"
-    }
-  ]
+  "approved": true,
+  "latest_version_code": 234,
+  "baseline_sha256": "94781262182be2bdd2a3ed3581811828e812fc4b0891e2b5db20a7c83e18d245",
+  "notes": "v234를 중앙업데이트 공식 기준본으로 확정했습니다. 다음 버전부터 프로그램 파일만 자동 업데이트되며 고객정보·백업·출력물은 그대로 유지됩니다.",
+  "updates": []
 }
