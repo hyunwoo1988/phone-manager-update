@@ -1,0 +1,118 @@
+name: Publish v233 central update
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download verified v232 and v233 artifacts
+        shell: pwsh
+        run: |
+          $v232 = "https://sdmntprseasia.oaiusercontent.com/files/00000000-1fb8-8207-a927-4da603218179/raw?se=2026-10-03T03%3A02%3A01Z&sp=r&sv=2026-02-06&sr=b&scid=03aba313-f3ab-516d-b291-d32ec3660065&skoid=6980ab1e-b994-4668-84de-ad0444c9d08b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-03T01%3A16%3A02Z&ske=2026-10-04T01%3A16%3A02Z&sks=b&skv=2026-02-06&sig=Rhty6gJtE2exmkC8cYy6yKWxEm34qyAaA%2Bsj%2BjjdV8c%3D"
+          $v233 = "https://sdmntprseasia.oaiusercontent.com/files/00000000-15e8-8207-a93f-d5a2a25d1f3c/raw?se=2026-10-03T03%3A02%3A14Z&sp=r&sv=2026-02-06&sr=b&scid=55edd1b6-a65e-5feb-a57a-313605b55ac1&skoid=6980ab1e-b994-4668-84de-ad0444c9d08b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-03T00%3A52%3A14Z&ske=2026-10-04T00%3A52%3A14Z&sks=b&skv=2026-02-06&sig=r9j/MGbLyoRvfKR0aVWsQLyK4AdwNlwF%2Bkrfc%2B6WtHg%3D"
+          Invoke-WebRequest -Uri $v232 -OutFile v232.zip
+          Invoke-WebRequest -Uri $v233 -OutFile v233.zip
+          Expand-Archive v232.zip -DestinationPath base -Force
+          Expand-Archive v233.zip -DestinationPath target -Force
+
+          $baseExe = (Get-ChildItem base -Recurse -Filter "폰매니저.exe" | Select-Object -First 1).FullName
+          $targetExe = (Get-ChildItem target -Recurse -Filter "폰매니저.exe" | Select-Object -First 1).FullName
+          if (-not $baseExe -or -not $targetExe) { throw "EXE not found in artifact" }
+
+          $baseSha = (Get-FileHash $baseExe -Algorithm SHA256).Hash.ToLower()
+          $targetSha = (Get-FileHash $targetExe -Algorithm SHA256).Hash.ToLower()
+          if ($baseSha -ne "680bb14231c3ae7b7bde6ff76a22a82106f112cfbb532eaba0c5e7d432642efe") { throw "v232 hash mismatch: $baseSha" }
+          if ($targetSha -ne "c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c") { throw "v233 hash mismatch: $targetSha" }
+          "BASE_EXE=$baseExe" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "TARGET_EXE=$targetExe" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Download zstd and build verified patch
+        shell: pwsh
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-v1.5.7-win64.zip" -OutFile zstd.zip
+          Expand-Archive zstd.zip -DestinationPath zstd -Force
+          $zstd = (Get-ChildItem zstd -Recurse -Filter zstd.exe | Select-Object -First 1).FullName
+          if (-not $zstd) { throw "zstd.exe not found" }
+
+          & $zstd -19 --patch-from="$env:BASE_EXE" -f "$env:TARGET_EXE" -o patch_232_233.zst
+          if ($LASTEXITCODE -ne 0) { throw "patch generation failed" }
+          $patchSha=(Get-FileHash patch_232_233.zst -Algorithm SHA256).Hash.ToLower()
+
+          & $zstd -d --patch-from="$env:BASE_EXE" -f patch_232_233.zst -o reconstructed233.exe
+          if ($LASTEXITCODE -ne 0) { throw "patch reconstruction failed" }
+          $reconSha=(Get-FileHash reconstructed233.exe -Algorithm SHA256).Hash.ToLower()
+          if ($reconSha -ne "c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c") { throw "reconstructed hash mismatch: $reconSha" }
+
+          "ZSTD_EXE=$zstd" | Out-File -FilePath $env:GITHUB_ENV -Append
+          "PATCH_SHA=$patchSha" | Out-File -FilePath $env:GITHUB_ENV -Append
+          Write-Host "patch sha=$patchSha"
+
+      - name: Stage update as disabled
+        shell: pwsh
+        run: |
+          $manifest=[ordered]@{
+            approved=$false
+            latest_version_code=233
+            baseline_sha256="c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c"
+            notes="RaiDrive 실행 안정화와 중앙 자동업데이트 검증/교체 안정성을 개선했습니다."
+            updates=@(
+              [ordered]@{
+                from_version_code=232
+                to_version_code=233
+                base_sha256="680bb14231c3ae7b7bde6ff76a22a82106f112cfbb532eaba0c5e7d432642efe"
+                target_sha256="c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c"
+                patch_sha256=$env:PATCH_SHA
+                patch="patch_232_233.zst"
+              }
+            )
+          } | ConvertTo-Json -Depth 6
+          Set-Content update.json -Value $manifest -Encoding UTF8
+          git config user.name "phone-manager-update-bot"
+          git config user.email "phone-manager-update@users.noreply.github.com"
+          git add patch_232_233.zst update.json
+          git commit -m "Stage verified v233 update"
+          git push
+
+      - name: Validate from public raw server
+        shell: pwsh
+        run: |
+          Start-Sleep -Seconds 8
+          $stamp=[DateTimeOffset]::UtcNow.ToUnixTimeSeconds()
+          $manifestUrl="https://raw.githubusercontent.com/hyunwoo1988/phone-manager-update/main/update.json?_pm=$stamp"
+          $patchUrl="https://raw.githubusercontent.com/hyunwoo1988/phone-manager-update/main/patch_232_233.zst?_pm=$stamp"
+          Invoke-WebRequest -Uri $manifestUrl -Headers @{"Cache-Control"="no-cache"} -OutFile public_update.json
+          $m=Get-Content public_update.json -Raw -Encoding UTF8 | ConvertFrom-Json
+          if ($m.approved -ne $false) { throw "staged manifest unexpectedly approved" }
+          if ([int]$m.latest_version_code -ne 233) { throw "public manifest version mismatch" }
+
+          Invoke-WebRequest -Uri $patchUrl -Headers @{"Cache-Control"="no-cache"} -OutFile public_patch.zst
+          $publicPatchSha=(Get-FileHash public_patch.zst -Algorithm SHA256).Hash.ToLower()
+          if ($publicPatchSha -ne $env:PATCH_SHA) { throw "public patch hash mismatch" }
+
+          & $env:ZSTD_EXE -d --patch-from="$env:BASE_EXE" -f public_patch.zst -o public_reconstructed233.exe
+          if ($LASTEXITCODE -ne 0) { throw "public patch reconstruction failed" }
+          $publicReconSha=(Get-FileHash public_reconstructed233.exe -Algorithm SHA256).Hash.ToLower()
+          if ($publicReconSha -ne "c2c6f21cafacf60e45675a2f30fdd37502dc0ded4e2506961568b017340e0d8c") { throw "public reconstructed hash mismatch" }
+
+          $env:QT_QPA_PLATFORM=""
+          $p=Start-Process -FilePath .\public_reconstructed233.exe -ArgumentList "--self-test" -Wait -PassThru
+          if ($p.ExitCode -ne 0) { throw "public reconstructed v233 self-test failed: $($p.ExitCode)" }
+
+      - name: Approve central update only after validation
+        shell: pwsh
+        run: |
+          $m=Get-Content update.json -Raw -Encoding UTF8 | ConvertFrom-Json
+          $m.approved=$true
+          $json=$m | ConvertTo-Json -Depth 6
+          Set-Content update.json -Value $json -Encoding UTF8
+          git add update.json
+          git commit -m "Approve v233 central update after end-to-end validation"
+          git push
