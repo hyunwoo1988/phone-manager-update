@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 239,
-  "baseline_sha256": "7e6c74cdf1d436e1a16a045362751129c012744679d1ee0923691de2bb8b8fde",
-  "notes": "월 납부 견적서 수정과 RaiDrive 로컬 실행 캐시 오류를 함께 수정했습니다. 새 EXE는 실제 SHA256 기준으로 로컬 실행본을 갱신합니다.",
+  "latest_version_code": 240,
+  "baseline_sha256": "b5ffe631e3509129499b9c8bdf040deecd9ed50742e9a1da3aabf31f4d6aa799",
+  "notes": "왼쪽 메뉴 선택 시 버튼 안쪽에 다시 생기던 포커스 사각형을 제거했습니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -51,6 +51,14 @@
       "target_sha256": "7e6c74cdf1d436e1a16a045362751129c012744679d1ee0923691de2bb8b8fde",
       "patch_sha256": "f404c90d87299ef607c35de78bcbdccc513ba9fca3fae3d4debded7776f70840",
       "patch": "patch_237_239.zst"
+    },
+    {
+      "from_version_code": 239,
+      "to_version_code": 240,
+      "base_sha256": "7e6c74cdf1d436e1a16a045362751129c012744679d1ee0923691de2bb8b8fde",
+      "target_sha256": "b5ffe631e3509129499b9c8bdf040deecd9ed50742e9a1da3aabf31f4d6aa799",
+      "patch_sha256": "77387bef3f006dbf014e6d9527a0b43bc7dcce458a053b917cf59d8a8b97a7fa",
+      "patch": "patch_239_240.zst"
     }
   ]
 }
