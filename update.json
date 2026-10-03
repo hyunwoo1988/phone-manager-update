@@ -1,8 +1,8 @@
 {
-  "approved": true,
+  "approved": false,
   "latest_version_code": 228,
   "baseline_sha256": "15fa42c1ea6a3deecaffd845c2d6b32628a2caccec4f61f5e76cf1063bdc4be1",
-  "notes": "무선가입안내 지원금·할부·결제 영역에서 출고가와 할부기간 위치를 정리했습니다.",
+  "notes": "v228 패키징 오류로 자동업데이트를 잠시 중지했습니다. 수정된 폰매니저(v229)를 직접 배포합니다.",
   "updates": [
     {
       "from_version_code": 227,
