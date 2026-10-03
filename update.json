@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 240,
-  "baseline_sha256": "b5ffe631e3509129499b9c8bdf040deecd9ed50742e9a1da3aabf31f4d6aa799",
-  "notes": "왼쪽 메뉴 선택 시 버튼 안쪽에 다시 생기던 포커스 사각형을 제거했습니다.",
+  "latest_version_code": 241,
+  "baseline_sha256": "8a691ee5fd2a1139a7c1b13e4ed221959c2e6d81619560b86e2dc14a4f893697",
+  "notes": "무선 가입 안내와 사전양식 입력칸이 한 줄 전체 폭으로 늘어나던 문제를 수정하고, 이전과 같은 2열 배열과 균형 폭으로 복원했습니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -59,6 +59,14 @@
       "target_sha256": "b5ffe631e3509129499b9c8bdf040deecd9ed50742e9a1da3aabf31f4d6aa799",
       "patch_sha256": "77387bef3f006dbf014e6d9527a0b43bc7dcce458a053b917cf59d8a8b97a7fa",
       "patch": "patch_239_240.zst"
+    },
+    {
+      "from_version_code": 240,
+      "to_version_code": 241,
+      "base_sha256": "b5ffe631e3509129499b9c8bdf040deecd9ed50742e9a1da3aabf31f4d6aa799",
+      "target_sha256": "8a691ee5fd2a1139a7c1b13e4ed221959c2e6d81619560b86e2dc14a4f893697",
+      "patch_sha256": "debce421bfb31b38378e20fa112ce9e62e9d7a7d35a4872fa15d980271d569ab",
+      "patch": "patch_240_241.zst"
     }
   ]
 }
