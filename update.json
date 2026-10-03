@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 237,
-  "baseline_sha256": "acd474f9c385de95cf1477d951082acb9fcbccc2e4e300f75723c966f8373f92",
-  "notes": "예전 배포본(v232 포함)도 최신 버전까지 올라오도록 중앙업데이트 경로를 보완했고, 월 납부 견적서 표 값들을 가운데 정렬했습니다.",
+  "latest_version_code": 238,
+  "baseline_sha256": "a5746171ddccb2fc9d3abf11c63527d56d46dc3ffa8bf01e70ab396267d6d23f",
+  "notes": "월 납부 견적서에서 보험 표시, 보험 포함 월합계, 최종 변경 요금제/변경 가능일 배치와 강조, 월 단말기 할부금 이자 포함 표시를 반영했습니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -43,6 +43,14 @@
       "target_sha256": "acd474f9c385de95cf1477d951082acb9fcbccc2e4e300f75723c966f8373f92",
       "patch_sha256": "4d3351bb1c896738241490987e5625ad7000dae284fb8af29dad21ad43f5057a",
       "patch": "patch_236_237.zst"
+    },
+    {
+      "from_version_code": 237,
+      "to_version_code": 238,
+      "base_sha256": "acd474f9c385de95cf1477d951082acb9fcbccc2e4e300f75723c966f8373f92",
+      "target_sha256": "a5746171ddccb2fc9d3abf11c63527d56d46dc3ffa8bf01e70ab396267d6d23f",
+      "patch_sha256": "a4cb5cf6e14d901850d49d41d886b03cd8b31c7294bde1f3c9ace62557f52ac6",
+      "patch": "patch_237_238.zst"
     }
   ]
 }
