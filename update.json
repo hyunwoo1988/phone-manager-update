@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 235,
-  "baseline_sha256": "d3f86e827351ed0780cc54f98099a5cb47a2204db69b68de101b158cff2bdbff",
-  "notes": "월 납부 견적서에 보험 유지/해지 선택을 추가하고, RaiDrive 사용 시 미리보기/출력창 표시 속도를 개선했습니다.",
+  "latest_version_code": 236,
+  "baseline_sha256": "b1c222faddd255160e30bc9b71102baa3c14df5ba63c29e5c746fc9e3702cd3b",
+  "notes": "월 납부 견적서 상단의 중복 보험 해지 가능일·해지 조건을 제거하고 보험 유지/해지만 남겼습니다.",
   "updates": [
     {
       "from_version_code": 234,
@@ -11,6 +11,14 @@
       "target_sha256": "d3f86e827351ed0780cc54f98099a5cb47a2204db69b68de101b158cff2bdbff",
       "patch_sha256": "fa1eb3a1c55b24790228bffb32fcffbbb539176d650a7688c3d76f315df3e3f2",
       "patch": "patch_234_235.zst"
+    },
+    {
+      "from_version_code": 235,
+      "to_version_code": 236,
+      "base_sha256": "d3f86e827351ed0780cc54f98099a5cb47a2204db69b68de101b158cff2bdbff",
+      "target_sha256": "b1c222faddd255160e30bc9b71102baa3c14df5ba63c29e5c746fc9e3702cd3b",
+      "patch_sha256": "7d4b4e809ba99b2445da659bc6b98519d5a35ca4a6feec654ec6cb8ce2b901e7",
+      "patch": "patch_235_236.zst"
     }
   ]
 }
