@@ -1,0 +1,83 @@
+name: Publish v235 to v236 patch retry
+
+on:
+  push:
+    paths:
+      - '.github/workflows/publish-v236-patch2.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download exact official builds
+        shell: pwsh
+        run: |
+          $u235 = 'https://sdmntprseasia.oaiusercontent.com/files/00000000-4a04-8207-83be-f4a426cd3571/raw?se=2026-10-03T04%3A10%3A06Z&sp=r&sv=2026-02-06&sr=b&scid=3aec222e-141a-5550-92e3-29f9c33a040a&skoid=6980ab1e-b994-4668-84de-ad0444c9d08b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-02T19%3A51%3A17Z&ske=2026-10-03T19%3A51%3A17Z&sks=b&skv=2026-02-06&sig=mzgCdevOou//V%2BfzIgpspZaW7b4eb7C7gmLCjhVb77k%3D'
+          $u236 = 'https://sdmntprseasia.oaiusercontent.com/files/00000000-0bc8-8207-aafe-e554e30ea322/raw?se=2026-10-03T04%3A10%3A21Z&sp=r&sv=2026-02-06&sr=b&scid=3c778fd3-7821-5ffd-b5bd-a901517362e3&skoid=6980ab1e-b994-4668-84de-ad0444c9d08b&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-03T00%3A05%3A03Z&ske=2026-10-04T00%3A05%3A03Z&sks=b&skv=2026-02-06&sig=Gxq6TK7ujnZyIHztuj8OGYJr01UcJ1qlw8ZP7w7yLcs%3D'
+          New-Item -ItemType Directory -Force work | Out-Null
+          Invoke-WebRequest -Uri $u235 -OutFile work/v235.zip
+          Invoke-WebRequest -Uri $u236 -OutFile work/v236.zip
+          Expand-Archive work/v235.zip work/v235 -Force
+          Expand-Archive work/v236.zip work/v236 -Force
+
+      - name: Verify builds
+        shell: pwsh
+        run: |
+          $h235=(Get-FileHash "work/v235/폰매니저.exe" -Algorithm SHA256).Hash.ToLower()
+          $h236=(Get-FileHash "work/v236/폰매니저.exe" -Algorithm SHA256).Hash.ToLower()
+          if ($h235 -ne "d3f86e827351ed0780cc54f98099a5cb47a2204db69b68de101b158cff2bdbff") { throw "v235 hash mismatch: $h235" }
+          if ($h236 -ne "b1c222faddd255160e30bc9b71102baa3c14df5ba63c29e5c746fc9e3702cd3b") { throw "v236 hash mismatch: $h236" }
+
+      - name: Generate verify and publish
+        shell: pwsh
+        run: |
+          $url="https://github.com/facebook/zstd/releases/download/v1.5.7/zstd-v1.5.7-win64.zip"
+          Invoke-WebRequest -Uri $url -OutFile work/zstd.zip
+          Expand-Archive work/zstd.zip work/zstd -Force
+          $zstd=(Get-ChildItem work/zstd -Recurse -Filter zstd.exe | Select-Object -First 1)
+          Copy-Item $zstd.FullName work/zstd.exe -Force
+          Copy-Item "work/v235/폰매니저.exe" "work/base235.exe" -Force
+          Copy-Item "work/v236/폰매니저.exe" "work/target236.exe" -Force
+
+          & .\work\zstd.exe -9 "--patch-from=work/base235.exe" -f "work/target236.exe" -o "patch_235_236.zst"
+          if ($LASTEXITCODE -ne 0) { throw "patch generation failed" }
+          & .\work\zstd.exe -d "--patch-from=work/base235.exe" -f "patch_235_236.zst" -o "work/reconstructed.exe"
+          if ($LASTEXITCODE -ne 0) { throw "patch reconstruction failed" }
+
+          $target=(Get-FileHash "work/target236.exe" -Algorithm SHA256).Hash.ToLower()
+          $recon=(Get-FileHash "work/reconstructed.exe" -Algorithm SHA256).Hash.ToLower()
+          if ($target -ne $recon) { throw "reconstructed EXE mismatch" }
+          $patchHash=(Get-FileHash "patch_235_236.zst" -Algorithm SHA256).Hash.ToLower()
+
+          $current=Get-Content -Raw -Encoding UTF8 "update.json" | ConvertFrom-Json
+          $updates=@($current.updates | Where-Object { [int]$_.from_version_code -ne 235 })
+          $updates += [pscustomobject]@{
+            from_version_code=235
+            to_version_code=236
+            base_sha256="d3f86e827351ed0780cc54f98099a5cb47a2204db69b68de101b158cff2bdbff"
+            target_sha256="b1c222faddd255160e30bc9b71102baa3c14df5ba63c29e5c746fc9e3702cd3b"
+            patch_sha256=$patchHash
+            patch="patch_235_236.zst"
+          }
+          $manifest=[ordered]@{
+            approved=$true
+            latest_version_code=236
+            baseline_sha256="b1c222faddd255160e30bc9b71102baa3c14df5ba63c29e5c746fc9e3702cd3b"
+            notes="월 납부 견적서 상단의 중복 보험 해지 가능일·해지 조건을 제거하고 보험 유지/해지만 남겼습니다."
+            updates=$updates
+          } | ConvertTo-Json -Depth 10
+          Set-Content -Path "update.json" -Value $manifest -Encoding UTF8
+
+          git config user.name "phone-manager-updater"
+          git config user.email "actions@users.noreply.github.com"
+          git add patch_235_236.zst update.json
+          git commit -m "Release v236 central update"
+          git push origin HEAD:main
