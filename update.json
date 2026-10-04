@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 242,
-  "baseline_sha256": "628fd83757c612ee2a0918ae28d8e70ee9096d1ce728135c9ece2933ba32cee1",
-  "notes": "무선 가입 안내와 사전양식의 입력칸 폭을 실제 2열 화면에 맞게 수정했습니다. 긴 모델명/요금제 때문에 한 칸이 화면 전체로 늘어나는 문제를 막았습니다.",
+  "latest_version_code": 243,
+  "baseline_sha256": "b47bf0f78a1896f22fe5cff50245ebeb8f915651709f8e3233981d0e9c02f809",
+  "notes": "월 납부 견적서 안내사항과 개통·교품 안내를 핵심 항목별로 짧게 정리하고 줄바꿈 가독성을 개선했습니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -75,6 +75,14 @@
       "target_sha256": "628fd83757c612ee2a0918ae28d8e70ee9096d1ce728135c9ece2933ba32cee1",
       "patch_sha256": "eeeee61c6994e81b0973d6264bc2b694ed78f406c48464720170a0786ef63f0d",
       "patch": "patch_241_242.zst"
+    },
+    {
+      "from_version_code": 242,
+      "to_version_code": 243,
+      "base_sha256": "628fd83757c612ee2a0918ae28d8e70ee9096d1ce728135c9ece2933ba32cee1",
+      "target_sha256": "b47bf0f78a1896f22fe5cff50245ebeb8f915651709f8e3233981d0e9c02f809",
+      "patch_sha256": "b1665c26ed49d0ff3af14ccadfb588969e556f49bbeb4905e1bfe4c3401ddef3",
+      "patch": "patch_242_243.zst"
     }
   ]
 }
