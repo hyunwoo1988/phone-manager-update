@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 246,
-  "baseline_sha256": "519c262ec8fc358fd973f2a4ac7521fa2b441bfca1e976cefc08c7d7b74dfec3",
-  "notes": "드롭다운 목록 높이가 한 줄로 접혀 여러 항목이 겹쳐 보이던 문제를 수정했습니다. 가입모델과 날짜 선택 목록이 여러 줄로 정상 표시됩니다.",
+  "latest_version_code": 248,
+  "baseline_sha256": "90e6351b1a4d660a0742588f6980ace797b5b27c717dabb956ab2fae52ae32a5",
+  "notes": "가입모델 화살표를 누르면 모델 목록이 한 줄로 합쳐져 보이던 문제를 수정했습니다. 모델 전용 세로 목록으로 표시되며 각 모델이 한 줄씩 나오고 스크롤로 전체 목록을 선택할 수 있습니다. 검색 기능과 고객관리 휴대폰 번호 입력칸 확대도 유지됩니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -107,6 +107,14 @@
       "target_sha256": "519c262ec8fc358fd973f2a4ac7521fa2b441bfca1e976cefc08c7d7b74dfec3",
       "patch_sha256": "1b0adc24a0e2d7f7d580155cce9f133b7593a5aeb25264ef4a5d43142471cb67",
       "patch": "patch_245_246.zst"
+    },
+    {
+      "from_version_code": 246,
+      "to_version_code": 248,
+      "base_sha256": "519c262ec8fc358fd973f2a4ac7521fa2b441bfca1e976cefc08c7d7b74dfec3",
+      "target_sha256": "90e6351b1a4d660a0742588f6980ace797b5b27c717dabb956ab2fae52ae32a5",
+      "patch_sha256": "c455bbb11a6d6b8a066ac3f9548181cf149a12676fe36dd25b4673b2bb6c9df5",
+      "patch": "patch_246_248.zst"
     }
   ]
 }
