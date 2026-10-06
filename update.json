@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 254,
-  "baseline_sha256": "77729db3faf1a9fabf192a4c9b2f01227c5a86211923e5d22634c9cfc6912c3e",
-  "notes": "가입모델 선택칸을 일반 자동완성과 분리한 전용 모델 선택칸으로 변경했습니다. 화살표 클릭 시 전체 모델 세로목록, 직접 입력 시 필터된 모델 세로목록만 표시합니다.",
+  "latest_version_code": 255,
+  "baseline_sha256": "cbf363fd84f7be614e3eb4a9018f3cc958a61361155f8bf827ba2b50d12e396b",
+  "notes": "가입모델 값이 여러 모델명으로 합쳐지는 문제를 화면·저장·출력 단계에서 모두 차단했습니다. 기존에 합쳐져 저장된 값도 정상 모델 1개로 복구하며, 서식지 출력에도 한 모델만 전달됩니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -139,6 +139,14 @@
       "target_sha256": "77729db3faf1a9fabf192a4c9b2f01227c5a86211923e5d22634c9cfc6912c3e",
       "patch_sha256": "f2f98ab2c6d1dc96b94104a9953c74b12b54a47fd2b0210a867c9d7c62f1c46b",
       "patch": "patch_253_254.zst"
+    },
+    {
+      "from_version_code": 254,
+      "to_version_code": 255,
+      "base_sha256": "77729db3faf1a9fabf192a4c9b2f01227c5a86211923e5d22634c9cfc6912c3e",
+      "target_sha256": "cbf363fd84f7be614e3eb4a9018f3cc958a61361155f8bf827ba2b50d12e396b",
+      "patch_sha256": "b82f63ba45fbb54e6e537eb427d45632bef885cf6903b96d8fd90809b3eccd08",
+      "patch": "patch_254_255.zst"
     }
   ]
 }
