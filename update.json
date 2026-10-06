@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 253,
-  "baseline_sha256": "8b9cb277c5a1d350f94ddcc08764db59f3dad0108a0c9a8848b365e85c6e10a9",
-  "notes": "가입모델 드롭다운을 실제 세로 리스트로 강제하도록 수정했습니다. 모델 95개가 각 항목별 한 줄씩 표시되고, 목록 높이와 스크롤을 고정해 한 줄에 여러 모델명이 붙어 보이지 않도록 했습니다.",
+  "latest_version_code": 254,
+  "baseline_sha256": "77729db3faf1a9fabf192a4c9b2f01227c5a86211923e5d22634c9cfc6912c3e",
+  "notes": "가입모델 선택칸을 일반 자동완성과 분리한 전용 모델 선택칸으로 변경했습니다. 화살표 클릭 시 전체 모델 세로목록, 직접 입력 시 필터된 모델 세로목록만 표시합니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -131,6 +131,14 @@
       "target_sha256": "8b9cb277c5a1d350f94ddcc08764db59f3dad0108a0c9a8848b365e85c6e10a9",
       "patch_sha256": "72af8a8dbb0a1ce05d28ce5920627a1e9e8199caa069b9681a69f8ae7f20598a",
       "patch": "patch_252_253.zst"
+    },
+    {
+      "from_version_code": 253,
+      "to_version_code": 254,
+      "base_sha256": "8b9cb277c5a1d350f94ddcc08764db59f3dad0108a0c9a8848b365e85c6e10a9",
+      "target_sha256": "77729db3faf1a9fabf192a4c9b2f01227c5a86211923e5d22634c9cfc6912c3e",
+      "patch_sha256": "f2f98ab2c6d1dc96b94104a9953c74b12b54a47fd2b0210a867c9d7c62f1c46b",
+      "patch": "patch_253_254.zst"
     }
   ]
 }
