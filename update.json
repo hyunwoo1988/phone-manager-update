@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 260,
-  "baseline_sha256": "3c4c8ebd017af83949e24f1af62d8cc89fc8dfceb3b16a6b2d807f0e46ebd092",
-  "notes": "가입모델 선택 목록을 일반 드롭다운처럼 입력칸 바로 아래에 표시하도록 수정했습니다. 모델 하나당 한 줄씩 세로로 최대 8개가 보이고, 오른쪽 스크롤로 전체 모델을 선택할 수 있습니다. 한 모델만 저장·출력되는 보호도 유지됩니다.",
+  "latest_version_code": 262,
+  "baseline_sha256": "23f995c780fefb2f16c18f11043842f6d95ef581da1bcae9485b03553818b3c4",
+  "notes": "모델 선택칸을 예전 정상 버전 방식으로 복원했습니다. 순수 QComboBox + QListView 세로 목록을 사용해 모델이 한 줄씩 표시되고, 모델 선택 시 드롭다운이 바로 닫히도록 했습니다. 최근 고객관리/고객약속관리 UI 수정은 유지됩니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -163,6 +163,14 @@
       "target_sha256": "3c4c8ebd017af83949e24f1af62d8cc89fc8dfceb3b16a6b2d807f0e46ebd092",
       "patch_sha256": "4aee4190465091b68a2e3079b17b99fc5af7e1565e2453fbae149d6c31c767da",
       "patch": "patch_256_260.zst"
+    },
+    {
+      "from_version_code": 260,
+      "to_version_code": 262,
+      "base_sha256": "3c4c8ebd017af83949e24f1af62d8cc89fc8dfceb3b16a6b2d807f0e46ebd092",
+      "target_sha256": "23f995c780fefb2f16c18f11043842f6d95ef581da1bcae9485b03553818b3c4",
+      "patch_sha256": "f1573f8f78d1393ceea548e7a567b1b4c637838328ea6a634a7b3a74572e7942",
+      "patch": "patch_260_262.zst"
     }
   ]
 }
