@@ -2,7 +2,7 @@
   "approved": true,
   "latest_version_code": 262,
   "baseline_sha256": "23f995c780fefb2f16c18f11043842f6d95ef581da1bcae9485b03553818b3c4",
-  "notes": "모델 선택칸을 예전 정상 버전 방식으로 복원했습니다. 순수 QComboBox + QListView 세로 목록을 사용해 모델이 한 줄씩 표시되고, 모델 선택 시 드롭다운이 바로 닫히도록 했습니다. 최근 고객관리/고객약속관리 UI 수정은 유지됩니다.",
+  "notes": "모델 선택칸을 예전 정상 버전 방식으로 복원했습니다. 또한 260→262 업데이트 패치를 Windows 환경에서 실제 재검증한 정상 패치로 교체했습니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -169,7 +169,7 @@
       "to_version_code": 262,
       "base_sha256": "3c4c8ebd017af83949e24f1af62d8cc89fc8dfceb3b16a6b2d807f0e46ebd092",
       "target_sha256": "23f995c780fefb2f16c18f11043842f6d95ef581da1bcae9485b03553818b3c4",
-      "patch_sha256": "f1573f8f78d1393ceea548e7a567b1b4c637838328ea6a634a7b3a74572e7942",
+      "patch_sha256": "ca52413086bb3344c22e335567b9a7374aa73283c662771453cd235385aec486",
       "patch": "patch_260_262.zst"
     }
   ]
