@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 255,
-  "baseline_sha256": "cbf363fd84f7be614e3eb4a9018f3cc958a61361155f8bf827ba2b50d12e396b",
-  "notes": "가입모델 값이 여러 모델명으로 합쳐지는 문제를 화면·저장·출력 단계에서 모두 차단했습니다. 기존에 합쳐져 저장된 값도 정상 모델 1개로 복구하며, 서식지 출력에도 한 모델만 전달됩니다.",
+  "latest_version_code": 256,
+  "baseline_sha256": "f4ee6e0a47c22051d998930bd7bdb58f165818a7eeded718155f3b47e58fabf6",
+  "notes": "가입모델 드롭다운을 독립된 세로 QListWidget 팝업으로 변경했습니다. 모델은 한 항목씩 세로로 표시되고, 팝업 높이를 고정해 한 줄에 여러 모델명이 이어져 보이지 않도록 했습니다. 한 모델만 선택·저장·출력되는 보호도 유지됩니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -147,6 +147,14 @@
       "target_sha256": "cbf363fd84f7be614e3eb4a9018f3cc958a61361155f8bf827ba2b50d12e396b",
       "patch_sha256": "b82f63ba45fbb54e6e537eb427d45632bef885cf6903b96d8fd90809b3eccd08",
       "patch": "patch_254_255.zst"
+    },
+    {
+      "from_version_code": 255,
+      "to_version_code": 256,
+      "base_sha256": "cbf363fd84f7be614e3eb4a9018f3cc958a61361155f8bf827ba2b50d12e396b",
+      "target_sha256": "f4ee6e0a47c22051d998930bd7bdb58f165818a7eeded718155f3b47e58fabf6",
+      "patch_sha256": "e8638837208a7ad769b630df3943498f25a9e141964688b182ab8a6bb4a7cb9a",
+      "patch": "patch_255_256.zst"
     }
   ]
 }
