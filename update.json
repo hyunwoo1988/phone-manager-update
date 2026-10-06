@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 243,
-  "baseline_sha256": "b47bf0f78a1896f22fe5cff50245ebeb8f915651709f8e3233981d0e9c02f809",
-  "notes": "월 납부 견적서 안내사항과 개통·교품 안내를 핵심 항목별로 짧게 정리하고 줄바꿈 가독성을 개선했습니다.",
+  "latest_version_code": 244,
+  "baseline_sha256": "36930c6aa2ccda49eeda25feb078ff1a588686b44b4c866404014ad17242ab8c",
+  "notes": "날짜 선택 드롭다운 맨 아래에 D+/M+ 규칙이 한 줄로 길게 합쳐져 표시되던 비정상 항목을 제거했습니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -83,6 +83,14 @@
       "target_sha256": "b47bf0f78a1896f22fe5cff50245ebeb8f915651709f8e3233981d0e9c02f809",
       "patch_sha256": "b1665c26ed49d0ff3af14ccadfb588969e556f49bbeb4905e1bfe4c3401ddef3",
       "patch": "patch_242_243.zst"
+    },
+    {
+      "from_version_code": 243,
+      "to_version_code": 244,
+      "base_sha256": "b47bf0f78a1896f22fe5cff50245ebeb8f915651709f8e3233981d0e9c02f809",
+      "target_sha256": "36930c6aa2ccda49eeda25feb078ff1a588686b44b4c866404014ad17242ab8c",
+      "patch_sha256": "3c83bf5bed195c7c2f9561676a8e19d7ddaa7b0ded58cae52b9c524844151914",
+      "patch": "patch_243_244.zst"
     }
   ]
 }
