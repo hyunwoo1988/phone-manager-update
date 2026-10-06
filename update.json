@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 256,
-  "baseline_sha256": "f4ee6e0a47c22051d998930bd7bdb58f165818a7eeded718155f3b47e58fabf6",
-  "notes": "가입모델 드롭다운을 독립된 세로 QListWidget 팝업으로 변경했습니다. 모델은 한 항목씩 세로로 표시되고, 팝업 높이를 고정해 한 줄에 여러 모델명이 이어져 보이지 않도록 했습니다. 한 모델만 선택·저장·출력되는 보호도 유지됩니다.",
+  "latest_version_code": 260,
+  "baseline_sha256": "3c4c8ebd017af83949e24f1af62d8cc89fc8dfceb3b16a6b2d807f0e46ebd092",
+  "notes": "가입모델 선택 목록을 일반 드롭다운처럼 입력칸 바로 아래에 표시하도록 수정했습니다. 모델 하나당 한 줄씩 세로로 최대 8개가 보이고, 오른쪽 스크롤로 전체 모델을 선택할 수 있습니다. 한 모델만 저장·출력되는 보호도 유지됩니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -155,6 +155,14 @@
       "target_sha256": "f4ee6e0a47c22051d998930bd7bdb58f165818a7eeded718155f3b47e58fabf6",
       "patch_sha256": "e8638837208a7ad769b630df3943498f25a9e141964688b182ab8a6bb4a7cb9a",
       "patch": "patch_255_256.zst"
+    },
+    {
+      "from_version_code": 256,
+      "to_version_code": 260,
+      "base_sha256": "f4ee6e0a47c22051d998930bd7bdb58f165818a7eeded718155f3b47e58fabf6",
+      "target_sha256": "3c4c8ebd017af83949e24f1af62d8cc89fc8dfceb3b16a6b2d807f0e46ebd092",
+      "patch_sha256": "4aee4190465091b68a2e3079b17b99fc5af7e1565e2453fbae149d6c31c767da",
+      "patch": "patch_256_260.zst"
     }
   ]
 }
