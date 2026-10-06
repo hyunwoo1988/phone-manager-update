@@ -1,8 +1,8 @@
 {
   "approved": true,
-  "latest_version_code": 245,
-  "baseline_sha256": "919b86b6ed7c0562c0f18223d768035186050de918c6b148cd5193e8b44a3dc6",
-  "notes": "가입모델 드롭다운에서 검색어 한 개만 보이던 문제를 수정해 화살표를 누르면 전체 모델 목록이 다시 표시되도록 했고, 고객관리 휴대폰 번호 입력칸 최소 폭을 넓혔습니다.",
+  "latest_version_code": 246,
+  "baseline_sha256": "519c262ec8fc358fd973f2a4ac7521fa2b441bfca1e976cefc08c7d7b74dfec3",
+  "notes": "드롭다운 목록 높이가 한 줄로 접혀 여러 항목이 겹쳐 보이던 문제를 수정했습니다. 가입모델과 날짜 선택 목록이 여러 줄로 정상 표시됩니다.",
   "updates": [
     {
       "from_version_code": 232,
@@ -99,6 +99,14 @@
       "target_sha256": "919b86b6ed7c0562c0f18223d768035186050de918c6b148cd5193e8b44a3dc6",
       "patch_sha256": "c81016fb190411c4cd3a83b792f6e3316ecf145f3c0fb0ba32287c8c1b8490b3",
       "patch": "patch_244_245.zst"
+    },
+    {
+      "from_version_code": 245,
+      "to_version_code": 246,
+      "base_sha256": "919b86b6ed7c0562c0f18223d768035186050de918c6b148cd5193e8b44a3dc6",
+      "target_sha256": "519c262ec8fc358fd973f2a4ac7521fa2b441bfca1e976cefc08c7d7b74dfec3",
+      "patch_sha256": "1b0adc24a0e2d7f7d580155cce9f133b7593a5aeb25264ef4a5d43142471cb67",
+      "patch": "patch_245_246.zst"
     }
   ]
 }
